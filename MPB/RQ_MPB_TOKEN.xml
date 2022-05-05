@@ -1,0 +1,35 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+	<soapenv:Header />
+	<soapenv:Body>
+		<tem:Execute>
+			<!--Optional:-->
+			<tem:message>
+				<Request xmlns:mpa="http://amadeus.com/latam/mpa/2010/1">
+					<mpa:Command>Login</mpa:Command>
+					<mpa:Version>3.0</mpa:Version>
+					<mpa:Language>es</mpa:Language>
+					<mpa:ResponseType>XML</mpa:ResponseType>
+					<mpa:Target>Test</mpa:Target>
+					<mpa:MaxExecutionTime>200</mpa:MaxExecutionTime>
+					<mpa:PageSize>50</mpa:PageSize>
+					<mpa:PageNumber>1</mpa:PageNumber>
+					<mpa:CacheRefresh>true</mpa:CacheRefresh>
+					<mpa:Message>
+						<LoginRQ>
+							<mpa:UserIdentification>
+								<mpa:Corporation>$Corporation$</mpa:Corporation>
+								<mpa:Password>$Password$</mpa:Password>
+								<mpa:Office>$Office$</mpa:Office>
+							</mpa:UserIdentification>
+						</LoginRQ>
+					</mpa:Message>
+					<mpa:ProviderSettings>
+						<mpa:ProviderSetting>
+							<mpa:Setting Key="Language" Value="ES" />
+						</mpa:ProviderSetting>
+					</mpa:ProviderSettings>
+				</Request>
+			</tem:message>
+		</tem:Execute>
+	</soapenv:Body>
+</soapenv:Envelope>

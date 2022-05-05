@@ -1,0 +1,64 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+	<soapenv:Header />
+	<soapenv:Body>
+		<tem:Execute>
+			<tem:message>
+				<Request xmlns:mpa="http://amadeus.com/latam/mpa/2010/1">
+					<mpa:Command>AirLowFareSearch</mpa:Command>
+					<mpa:Version>3.0</mpa:Version>
+					<mpa:Language>es</mpa:Language>
+					<mpa:ResponseType>XML</mpa:ResponseType>
+					<mpa:Target>Test</mpa:Target>
+					<mpa:MaxExecutionTime>200</mpa:MaxExecutionTime>
+					<mpa:PageSize>0</mpa:PageSize>
+					<mpa:PageNumber>1</mpa:PageNumber>
+					<mpa:CacheRefresh>true</mpa:CacheRefresh>
+					<mpa:Message>
+						<OTA_AirLowFareSearchRQ SequenceNmbr="0" TransactionIdentifier="$TransactionIdentifier$" MaxResponses="50" CorrelationID="" xsi:schemaLocation="http://www.opentravel.org/OTA/2003/05 OTA_AirLowFareSearchRQ.xsd" Version="2.001" xmlns="http://www.opentravel.org/OTA/2003/05" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+							<POS>
+								<Source AgentSine="BOGVU2308" TerminalID="BOGVU28AT">
+									<RequestorID Type="50" ID="01235" Instance="25000" />
+								</Source>
+								<Source AgentSine="BOGVU2308" TerminalID="BOGVU28AT">
+									<RequestorID Type="55" ID="01235" Instance="25000" />
+								</Source>
+								<Source AgentSine="57WN" TerminalID="57WN">
+									<RequestorID Type="45" ID="01235" Instance="25000" />
+								</Source>
+								<Source AgentSine="GF4J" TerminalID="GF4J">
+									<RequestorID Type="93" ID="01235" Instance="25000" />
+								</Source>
+							</POS>
+							<OriginDestinationInformation>
+								<DepartureDateTime CrossDateAllowedIndicator="true">$DateDeparture$T00:00:00</DepartureDateTime>
+								<OriginLocation LocationCode="$Origin$" AlternateLocationInd="true" />
+								<DestinationLocation LocationCode="$Destination$" AlternateLocationInd="true" />
+							</OriginDestinationInformation>
+							<TravelPreferences NoFareBreakIndicator="true">
+								<CabinPref Cabin="Economy" />
+							</TravelPreferences>
+							<TravelerInfoSummary>
+								<AirTravelerAvail>
+									<PassengerTypeQuantity Code="ADT" Quantity="1" />
+									<PassengerTypeQuantity Code="CHD" Quantity="0" />
+									<PassengerTypeQuantity Code="INF" Quantity="0" />
+								</AirTravelerAvail>
+							</TravelerInfoSummary>
+							<TPA_Extensions>
+								<FFType>0</FFType>
+								<!-- 0, vacio, no tag: No Airline FF (funcionamiento normal) |  1: Airline FF -->
+								<FFName>1</FFName>
+							</TPA_Extensions>
+						</OTA_AirLowFareSearchRQ>
+					</mpa:Message>
+					<mpa:ProviderSettings>
+						<mpa:ProviderSetting>
+							<mpa:Setting Key="ProviderId" Value="45;50;55;93" />
+							<mpa:Setting Key="Language" Value="ES" />
+						</mpa:ProviderSetting>
+					</mpa:ProviderSettings>
+				</Request>
+			</tem:message>
+		</tem:Execute>
+	</soapenv:Body>
+</soapenv:Envelope>
