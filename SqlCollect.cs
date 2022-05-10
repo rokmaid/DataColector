@@ -72,10 +72,10 @@ namespace AviaturCollectDataPrices
             return result;
         }
 
-        public static bool InsertDataIntoSQL(Dictionary<int, decimal> collection, OriDesQuery query)
+        public static bool InsertDataIntoSQL(Dictionary<int, InfoProvider> collection, OriDesQuery query)
         {
-            string commandText = @"INSERT INTO [dbo].[reportFareCityPair] ([Origin],[Destination],[KindOfTrip],[Fare],[Provider])
-                                   VALUES(@Origin, @Destination, @KindOfTrip, @Fare, @Provider); ";
+            string commandText = @"INSERT INTO [dbo].[reportFareCityPair] ([Origin],[Destination],[KindOfTrip],[Fare],[Provider],[TimeLapse])
+                                   VALUES(@Origin, @Destination, @KindOfTrip, @Fare, @Provider, @TimeLapse); ";
 
             if (connection.State == System.Data.ConnectionState.Open)
             {
@@ -88,14 +88,16 @@ namespace AviaturCollectDataPrices
                         command.Parameters.Add("@KindOfTrip", SqlDbType.Int);
                         command.Parameters.Add("@Fare", SqlDbType.Money);
                         command.Parameters.Add("@Provider", SqlDbType.Int);
+                        command.Parameters.Add("@TimeLapse", SqlDbType.Float);
 
                         foreach (var item in collection)
                         {
                             command.Parameters["@Origin"].Value = query.Origin;
                             command.Parameters["@Destination"].Value = query.Destination;
                             command.Parameters["@KindOfTrip"].Value = query.KindOfTrip;
-                            command.Parameters["@Fare"].Value = item.Value;
+                            command.Parameters["@Fare"].Value = item.Value.TotalFare;
                             command.Parameters["@Provider"].Value = item.Key;
+                            command.Parameters["@TimeLapse"].Value = item.Value.TimeLapse;
 
                             command.ExecuteNonQuery();
                         }

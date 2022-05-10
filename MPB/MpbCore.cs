@@ -29,7 +29,7 @@ namespace AviaturCollectDataPrices
             return xDoc.Descendants().Where(m => m.Name.LocalName == "TransactionIdentifier").FirstOrDefault().Value;
         }
 
-        public static async Task<Dictionary<int, decimal>> GetMpbResponse(string TransactionIdentifier, OriDesQuery queryTrip)
+        public static async Task<Dictionary<int, InfoProvider>> GetMpbResponse(string TransactionIdentifier, OriDesQuery queryTrip)
         {
             string soapString = (queryTrip.KindOfTrip == KINDOFTRIP.OneWay) ? 
                 File.ReadAllText(@".\MPB\RQ_MPB_ONEWAY.xml").Replace("$TransactionIdentifier$", TransactionIdentifier)
@@ -44,6 +44,7 @@ namespace AviaturCollectDataPrices
 
             var xDoc = XDocument.Parse(xmlString);
             var nodes = xDoc.Descendants().Where(m => m.Name.LocalName == "PricedItinerary");
+            var stats = xDoc.Descendants().Where(m => m.Name.LocalName == "ProviderResult");
 #if DEBUG
             Directory.CreateDirectory(@".\xml");
             _ = File.WriteAllTextAsync(@".\xml\" + queryTrip.ToString() + "_" + Environment.TickCount.ToString() + ".xml", xmlString, Encoding.UTF8).ConfigureAwait(true);
@@ -56,12 +57,12 @@ namespace AviaturCollectDataPrices
                     item.Descendants().Where(m => m.Name.LocalName == "Notes").FirstOrDefault().Value);
             }
             */
-            return GetMinimaFare(nodes);
+            return AnalizarResponse(nodes, stats);
         }
 
-        private static Dictionary<int, decimal> GetMinimaFare(IEnumerable<XElement> nodes)
+        private static Dictionary<int, InfoProvider> AnalizarResponse(IEnumerable<XElement> nodes, IEnumerable<XElement> stats)
         {
-            Dictionary<int, decimal> resultado = null;
+            Dictionary<int, InfoProvider> resultado = null;
             try
             {
                 var proveedores = nodes.Select(x => new {
@@ -75,7 +76,9 @@ namespace AviaturCollectDataPrices
                     fare = decimal.Parse(x.fare)
                 })
                 .GroupBy(o => o.proveedor)
-                .ToDictionary(g => g.Key, g => g.Min(o => o.fare));
+                .ToDictionary(g => g.Key, g => new InfoProvider(g.Min(o => o.fare), ObtenerTimeLapse(
+                    stats.Where(x => x.Attribute("Provider").Value == g.Key.ToString()).FirstOrDefault()?.Attribute("Information").Value)
+                ));
             }
             catch { }
 
@@ -105,6 +108,32 @@ namespace AviaturCollectDataPrices
             catch {}
 
             return 0;
+        }
+
+        /// <summary>
+        ///     Information="InitialDateTime=05/05/2022 10:33:10;FinalDateTime=05/05/2022 10:33:13;TimeLapse=2187.8615"
+        /// </summary>
+        /// <param name="information"></param>
+        /// <returns></returns>
+        private static double ObtenerTimeLapse(string information)
+        {
+            if (string.IsNullOrWhiteSpace(information)) return double.NaN;
+            try
+            {
+                var split = information.Split(';');
+                var nodo = split.FirstOrDefault(x => x.StartsWith("TimeLapse="));
+
+                if (!string.IsNullOrWhiteSpace(nodo))
+                {
+                    if (double.TryParse(nodo.Replace("TimeLapse=", ""), out double resultado))
+                    {
+                        return resultado;
+                    }
+                }
+            }
+            catch { }
+
+            return double.NaN;
         }
 
         private static async Task<HttpResponseMessage> PostXmlRequest(string baseUrl, string xmlString)

@@ -28,13 +28,13 @@ namespace AviaturCollectDataPrices
 
             foreach (OriDesQuery item in QUERY_CITYPAIRS)
             {
-                Dictionary<int, decimal> response = MpbCore.GetMpbResponse(mpbToken, item).Result;
+                Dictionary<int, InfoProvider> response = MpbCore.GetMpbResponse(mpbToken, item).Result;
                 SqlCollect.InsertDataIntoSQL(response, item);
 
                 Console.WriteLine("\nFrom: {0} To: {1} KindOfTrip {2} \t Providers: {3}", item.Origin, item.Destination, item.KindOfTrip, response.Count);
-                foreach (var kvp in response.OrderBy( x => x.Value))
+                foreach (var kvp in response.OrderBy( x => x.Value.TotalFare))
                 {
-                    Console.WriteLine("\tProviderId: {0} \t Fare: {1:C0}", kvp.Key, kvp.Value);
+                    Console.WriteLine("\tProviderId: {0} \t Fare: {1:C0} \t TimeLapse: {2:N2}", kvp.Key, kvp.Value.TotalFare, kvp.Value.TimeLapse);
                 }
             }
 

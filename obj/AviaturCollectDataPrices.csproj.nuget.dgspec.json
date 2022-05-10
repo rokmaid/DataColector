@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SG0208525\\OneDrive - Sabre\\Desktop\\Aviatur\\Data Colector\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj": {}
+    "C:\\Users\\SG0315236\\source\\repos\\Training\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SG0208525\\OneDrive - Sabre\\Desktop\\Aviatur\\Data Colector\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj": {
+    "C:\\Users\\SG0315236\\source\\repos\\Training\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SG0208525\\OneDrive - Sabre\\Desktop\\Aviatur\\Data Colector\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj",
+        "projectUniqueName": "C:\\Users\\SG0315236\\source\\repos\\Training\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj",
         "projectName": "AviaturCollectDataPrices",
-        "projectPath": "C:\\Users\\SG0208525\\OneDrive - Sabre\\Desktop\\Aviatur\\Data Colector\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj",
-        "packagesPath": "C:\\Users\\SG0208525\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SG0208525\\OneDrive - Sabre\\Desktop\\Aviatur\\Data Colector\\AviaturCollectDataPrices\\obj\\",
+        "projectPath": "C:\\Users\\SG0315236\\source\\repos\\Training\\AviaturCollectDataPrices\\AviaturCollectDataPrices.csproj",
+        "packagesPath": "C:\\Users\\SG0315236\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SG0315236\\source\\repos\\Training\\AviaturCollectDataPrices\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\SG0208525\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\SG0315236\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

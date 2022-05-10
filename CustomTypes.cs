@@ -19,4 +19,16 @@
             return string.Format("{0}_{1}_type{2}", Origin, Destination, KindOfTrip); 
         }
     }
+
+    public struct InfoProvider
+    {
+        public InfoProvider(decimal totalFare, double timeLapse)
+        {
+            TotalFare = totalFare;
+            TimeLapse = timeLapse;
+        }
+
+        public decimal TotalFare { get; private set; }
+        public double TimeLapse { get; private set; }
+    }
 }
